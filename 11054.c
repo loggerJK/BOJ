@@ -38,7 +38,7 @@ int inc (int k)/* 1번항부터 k번항까지, 증가수열의 최대 길이를 
     int max = 0; // 초기화
     for (int x = 1; x < k ; x++)
     {
-        if (data[x] > data[k])
+        if (data[x] >= data[k])
             continue;
         else 
             max = max_compare ( max, inc(x));
@@ -65,7 +65,7 @@ int dec (int k) /* k항 ~ 끝항까지, 감소 수열의 최대 길이를 계산
     int max = 0;
     for (int x = N ; k < x; x--)
     {
-        if (data[k] < data[x])
+        if (data[k] <= data[x])
             continue;
         max = max_compare (max, dec(x));
     }
