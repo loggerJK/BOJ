@@ -35,10 +35,14 @@ int inc (int k)/* 1번항부터 k번항까지, 증가수열의 최대 길이를 
 
     /* 1 < = x < k, data[x] < data[k] 를 만족하는 x 중에서, 최대 inc(x)를 찾는다 
     max는 최대 inc(x) 값을 가리킨다*/
-    int max = inc(1); // 초기화
-    for (int x = 2; x < k, data[x] < data[k]; x++)
+    int max = 0; // 초기화
+    for (int x = 1; x < k ; x++)
     {
-        max = max_compare ( max, inc(x));
+        if (data[x] > data[k])
+            continue;
+        else 
+            max = max_compare ( max, inc(x));
+
     }
 
     /* 이때, inc(k) = inc(x) + 1 */
@@ -58,9 +62,11 @@ int dec (int k) /* k항 ~ 끝항까지, 감소 수열의 최대 길이를 계산
         return dec_dp[k];
 
     /* k < x <= N, data[k] > data[x] 를 만족하는 x 중에서, 최대 dec(x) 값을 구한다 */
-    int max = dec(N);
-    for (int x = N -1; k < x, data[k] > data[x]; x--)
+    int max = 0;
+    for (int x = N ; k < x; x--)
     {
+        if (data[k] < data[x])
+            continue;
         max = max_compare (max, dec(x));
     }
 
@@ -90,16 +96,16 @@ int main()
     }
 
 
-    for (int i = 1; i <= N; i++)
-    {
-        printf("inc(%d) = %d\n",i, inc(i));
-    }
-    // int max = 0;
     // for (int i = 1; i <= N; i++)
     // {
-    //     printf("inc(%d) = %d, dec(%d) = %d\n", i, inc(i), i, dec(i));
-    //     max = (max, inc(i) + dec(i) -1);
+    //     printf("inc(%d) = %d\n",i, inc(i));
     // }
-    // printf("%d\n", max);
+    int max = 0;
+    for (int i = 1; i <= N; i++)
+    {
+        // printf("inc(%d) = %d, dec(%d) = %d\n", i, inc(i), i, dec(i));
+        max = max_compare(max, inc(i) + dec(i) -1);
+    }
+    printf("%d", max);
 
 }
