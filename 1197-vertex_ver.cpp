@@ -10,7 +10,6 @@ using namespace std;
 typedef struct vertex
 {
     int num;
-    bool is_in_MST;
     int key;
 };
 
@@ -50,18 +49,11 @@ int main()
 
     // 초기화
 
-    // 더미 데이터 삽입, 인덱스를 1부터 활용하기 위함
-    vertex tmp;
-    tmp.num = 0;
-    tmp.is_in_MST = false;
-    tmp.key = INF;
-
     // vertice initilization
     for (int i = 0; i <= V; i++)
     {
         vertex tmp;
         tmp.num = i;
-        tmp.is_in_MST = false;
         tmp.key = INF;
         vertice.push_back(tmp);
     }
@@ -86,6 +78,10 @@ int main()
         pii.first = v;
         pii.second = w;
         adj_list[u].push_back(pii);
+        pair<int, int> pii2;
+        pii2.first = u;
+        pii2.second = w;
+        adj_list[v].push_back(pii2);
     }
 
     // 1번째 노드부터 시작하자
@@ -93,20 +89,20 @@ int main()
 
     // priority queue initilization
     priority_queue<int, vector<int>, comp> pq;
-    for (int i = 1; i <= V; i++)
-    {
-        pq.push(i);
-    }
+    pq.push(1);
 
     while (!pq.empty())
     {
         // 가장 가중치가 낮은 노드 u를 고른다
         int u = 0;
         u = pq.top();
+        pq.pop();
+
+        // cout << u;
 
         if (MST_nodes_list[u] == true)
             continue;
-        // 이 노드 u는 이후 MST에 포함되는 것이 확실하므로, MST_nodes_list의 값의 true로 변경한다
+        // 이 노드 u는 이후 MST에 포함되는 것이 확실하므로, MST_nodes_list의 값을 true로 변경한다
         MST_nodes_list[u] = true;
 
         // 인접 노드들에 대해서 가중치 갱신을 수행한다
@@ -119,10 +115,9 @@ int main()
             if (MST_nodes_list[j] == false && weight < vertice[j].key)
             {
                 vertice[j].key = weight;
+                pq.push(j);
             }
         }
-        // 바뀐 key 값을 반영하여 새로운 top 노드가 설정된다
-        pq.pop();
     }
 
     for (int i = 1; i <= V; i++)

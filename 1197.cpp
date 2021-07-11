@@ -88,7 +88,6 @@ int main()
     }
 
     // 1번 노드부터 시작
-    vertice[1].key = 0;
     MST_nodes_list[1] = true;
 
     // priority queue initilization
