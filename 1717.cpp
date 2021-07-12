@@ -28,8 +28,8 @@ void merge(int a, int b)
     // '한 노드의 루트'의 루트가 다른 집합의 루트가 되도록 설정한다
     // b -> a merge
 
-    if (a == b)
-        return;
+    // if (a == b)
+    //     return;
     int root_a = find_root(a);
     int root_b = find_root(b);
     // 만약 같은 집합이라면 굳이 merge를 시행하지 않는다
