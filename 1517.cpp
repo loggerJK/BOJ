@@ -72,10 +72,10 @@ ull inversionCounting(int A[maxN + 1], int start, int end)
             for (int f = left_idx; f < mid;)
             {
                 tempA[pointer_origin] = A[f];
+                answer += cnt;
                 f++;
                 pointer_origin++;
             }
-            answer += cnt;
             cnt = 0;
             break;
         }
@@ -120,6 +120,6 @@ int main()
 
     cout << inversionCounting(A, 0, N);
 
-    for (int i = 0; i < N; i++)
-        cout << A[i] << " ";
+    // for (int i = 0; i < N; i++)
+    //     cout << A[i] << " ";
 }
