@@ -26,8 +26,8 @@ void BFS(int idx)
         if (visited[i] == true)
             continue;
         visited[i] = true;
-		// 인접 노드들에 대해서 parent 배열을 업데이트하고 큐에 삽입한다
-		// 사실 트리이므로 이미 방문한 노드들을 방문할 일이 없긴 함!
+        // 인접 노드들에 대해서 parent 배열을 업데이트하고 큐에 삽입한다
+        // 사실 트리이므로 이미 방문한 노드들을 방문할 일이 없긴 함!
         for (int j = 0; j < adj_list[i].size(); j++)
         {
             if (parent[adj_list[i][j]] == -1)
