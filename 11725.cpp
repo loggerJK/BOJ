@@ -26,8 +26,13 @@ void BFS(int idx)
         if (visited[i] == true)
             continue;
         visited[i] = true;
+        // 인접 노드들에 대해서 parent 배열을 업데이트하고 큐에 삽입한다
+        // 사실 트리이므로 이미 방문한 노드들을 방문할 일이 없긴 함!
         for (int j = 0; j < adj_list[i].size(); j++)
         {
+            // 방문할 노드 번호 : j
+            parent[j] = i;
+            q.push(j);
         }
     }
 }
@@ -52,4 +57,9 @@ int main()
     }
 
     BFS(1);
+
+    for (int i = 2; i <= N; i++)
+    {
+        cout << parent[i];
+    }
 }
