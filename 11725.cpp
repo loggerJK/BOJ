@@ -30,9 +30,12 @@ void BFS(int idx)
         // 사실 트리이므로 이미 방문한 노드들을 방문할 일이 없긴 함!
         for (int j = 0; j < adj_list[i].size(); j++)
         {
-            // 방문할 노드 번호 : j
-            parent[j] = i;
-            q.push(j);
+            if (parent[adj_list[i][j]] == -1)
+            {
+                // 방문할 노드 번호 : adj_list[i][j]
+                parent[adj_list[i][j]] = i;
+                q.push(adj_list[i][j]);
+            }
         }
     }
 }
@@ -48,7 +51,7 @@ int main()
         parent.push_back(-1);
     }
 
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < N - 1; i++)
     {
         int a = 0, b = 0;
         cin >> a >> b;
@@ -60,6 +63,6 @@ int main()
 
     for (int i = 2; i <= N; i++)
     {
-        cout << parent[i];
+        cout << parent[i] << "\n";
     }
 }
