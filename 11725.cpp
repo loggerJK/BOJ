@@ -60,17 +60,9 @@ int main()
     }
 
     BFS(1);
-<<<<<<< HEAD
-	
-	for (int i = 2; i <= N; i++)
-	{
-		cout<<parent[i];
-	}
-=======
 
     for (int i = 2; i <= N; i++)
     {
         cout << parent[i] << "\n";
     }
->>>>>>> 228a7cfc17a4899b4e7afd03c0f79b919f9502d6
 }
