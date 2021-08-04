@@ -1,68 +1,66 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-int c = 0;
+#include <cstdio>
+#include <algorithm>
+#include <vector>
+using namespace std;
+int N, M;
+vector<vector<int>> adj;
 
-typedef struct node
+vector<bool> visited;
+vector<int> order;
+void dfs(int here)
 {
-    int visit;
+    visited[here] = true;
 
-} Node;
-
-void search(Node arr[], int node_num, int tree_num, int print[], int N, int M);
-
-int main()
-{
-    int N, M;
-    scanf("%d %d", &N, &M);
-    Node arr[8 + 1]; // 8개의 노드 생성
-
-    for (int i = 0; i <= 8; i++)
+    for (int there = 0; there < adj.size(); there++)
     {
-        arr[i].visit = 0;
+        if (adj[here][there] && !visited[there])
+            dfs(there);
     }
-
-    int print[8 + 1]; // 8개의 depth까지 저장 가능한 출력용 배열
-
-    for (int i = 1; i <= N; i++)
-    {
-        search(arr, i, 1, print, N, M); // i를 시작 노드로 하여 DFS 시작
-    }
+    //위의 정점이 다 종료된 후에 이 곳의 정점(here)이 추가가 되어야함
+    order.push_back(here);
 }
 
-void search(Node arr[], int node_num, int tree_num, int print[], int N, int M)
+void topologicalSort()
 {
-    print[tree_num] = node_num; // 출력용 배열에 노드 넘버 추가
+    int n = adj.size();
+    visited = vector<bool>(N, false);
 
-    if (tree_num == M)
-    { // 끝노드라면 프린트 & 방문X & 서칭 종료
-        if (c == 0)
-        {
-            for (int i = 1; i <= M; i++)
-            {
-                printf("%d ", print[i]);
-                c = 1;
-            }
-        }
-        else
-        {
-            printf("\n");
-            for (int i = 1; i <= M; i++)
-            {
-                printf("%d ", print[i]);
-            }
-        }
-        return;
+    order.clear();
+
+    //들어오는 간선이 없을 경우가 있을 수 있으므로 모두 DFS 탐색
+    for (int i = 0; i < N; i++)
+        if (!visited[i])
+            dfs(i);
+
+    //종료된 순서를 거꾸로 만든다.
+    reverse(order.begin(), order.end());
+}
+
+void printOrder()
+{
+    for (int i = 0; i < order.size(); i++)
+        printf("%c ", order[i] + 'A');
+    printf("\n");
+}
+int main()
+{
+    printf("정점의 갯수 : ");
+    scanf("%d", &N);
+
+    printf("간선의 갯수 : ");
+    scanf("%d", &M);
+
+    visited = vector<bool>(N, false);
+    adj = vector<vector<int>>(N, vector<int>(N, 0));
+
+    for (int i = 0; i < M; i++)
+    {
+        char from, to;
+        printf("정점1 -> 정점2 : ");
+        scanf(" %c %c", &from, &to);
+        adj[from - 'A'][to - 'A'] = 1;
     }
 
-    arr[node_num].visit = 1; // 방문 처리
-
-    for (int i = 1; i <= N; i++)
-    { // N까지의 노드 방문여부 검사 && 방문하지 않았다면 방문
-        if (arr[i].visit == 0)
-        {
-            search(arr, i, tree_num + 1, print, N, M);
-        }
-    }
-
-    arr[node_num].visit = 0; // 다시 방문X로 설정
+    topologicalSort();
+    printOrder();
 }
