@@ -46,6 +46,10 @@
         "sstream": "cpp",
         "stdexcept": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "queue": "cpp",
+        "ios": "cpp",
+        "__locale": "cpp",
+        "__string": "cpp"
     }
 }
