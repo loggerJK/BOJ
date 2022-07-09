@@ -4,34 +4,43 @@
         // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387 을(를) 방문하세요.
         "version": "0.2.0",
         "configurations": [{
-                "name": "g++ - 활성 파일 빌드 및 디버그",
-                "type": "cppdbg",
-                "request": "launch",
-                "program": "${workspaceFolder}/out/${fileBasenameNoExtension}",
-                "args": [],
-                "stopAtEntry": false,
-                "cwd": "${workspaceFolder}",
-                "environment": [],
-                "externalConsole": false,
-                "MIMode": "gdb",
-                "miDebuggerPath": "/usr/bin/gdb",
-                "setupCommands": [{
-                        "description": "gdb에 자동 서식 지정 사용",
-                        "text": "-enable-pretty-printing",
-                        "ignoreFailures": true
-                }],
-                "preLaunchTask": "C/C++: g++ build active file"
-        }, {
-                "name": "lldb - 활성 파일 빌드 및 디버그",
-                "type": "cppdbg",
-                "request": "launch",
-                "program": "${workspaceFolder}/out/${fileBasenameNoExtension}",
-                "args": [],
-                "stopAtEntry": false,
-                "cwd": "${workspaceFolder}",
-                "environment": [],
-                "externalConsole": true,
-                "MIMode": "lldb",
-                "preLaunchTask": "C/C++: g++ build active file"
-        }]
+                        "name": "Python: 현재 파일",
+                        "type": "python",
+                        "request": "launch",
+                        "program": "${file}",
+                        "console": "integratedTerminal",
+                        "justMyCode": true
+                },
+                {
+                        "name": "g++ - 활성 파일 빌드 및 디버그",
+                        "type": "cppdbg",
+                        "request": "launch",
+                        "program": "${workspaceFolder}/out/${fileBasenameNoExtension}",
+                        "args": [],
+                        "stopAtEntry": false,
+                        "cwd": "${workspaceFolder}",
+                        "environment": [],
+                        "externalConsole": true,
+                        "MIMode": "gdb",
+                        "miDebuggerPath": "/usr/bin/gdb",
+                        "setupCommands": [{
+                                "description": "gdb에 자동 서식 지정 사용",
+                                "text": "-enable-pretty-printing",
+                                "ignoreFailures": true
+                        }],
+                        "preLaunchTask": "g++ for BOJ"
+                }, {
+                        "name": "lldb - 활성 파일 빌드 및 디버그",
+                        "type": "cppdbg",
+                        "request": "launch",
+                        "program": "${workspaceFolder}/out/${fileBasenameNoExtension}",
+                        "args": [],
+                        "stopAtEntry": false,
+                        "cwd": "${workspaceFolder}",
+                        "environment": [],
+                        "externalConsole": true,
+                        "MIMode": "lldb",
+                        "preLaunchTask": "g++ for BOJ"
+                }
+        ]
 }
